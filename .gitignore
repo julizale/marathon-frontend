@@ -36,3 +36,12 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Vaadin ###
+frontend/
+package-lock.json
+package.json
+tsconfig.json
+types.d.ts
+vite.config.ts
+vite.generated.ts
