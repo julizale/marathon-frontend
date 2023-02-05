@@ -1,11 +1,10 @@
 package com.marathonfront.config;
 
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
 
 @Getter
 public class ApiConfig {
 
-    @Value("${api.url}")
-    private String apiUrl;
+    public static String apiUrl = "http://localhost:8080/v1/";
+
 }
