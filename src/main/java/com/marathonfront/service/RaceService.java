@@ -63,8 +63,6 @@ public class RaceService {
         } catch (RestClientException e) {
             LOGGER.error("Rest client exception: " + e.getMessage(), e);
         }
-
-
     }
 
     public void delete(Race race) {

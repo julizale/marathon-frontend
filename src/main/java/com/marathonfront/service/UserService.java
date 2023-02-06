@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -56,7 +55,7 @@ public class UserService {
                 .create();
         String jsonContent = gson.toJson(user);
 
-        HttpEntity<String> entity = new HttpEntity<String>(jsonContent, headers);
+        HttpEntity<String> entity = new HttpEntity<>(jsonContent, headers);
         LOGGER.info("Sending request to create user");
         try {
             restTemplate.postForObject(url, entity, String.class);
@@ -64,6 +63,10 @@ public class UserService {
         } catch (RestClientException e) {
             LOGGER.error("Rest client exception: " + e.getMessage(), e);
         }
+
+    }
+
+    public void delete(User user) {
 
     }
 }
