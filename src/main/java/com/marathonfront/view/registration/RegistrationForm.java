@@ -14,13 +14,11 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.Route;
 import lombok.Getter;
 
 import java.util.stream.Stream;
 
 @Getter
-@Route("register")
 public class RegistrationForm extends FormLayout {
 
     private final TeamService teamService = TeamService.getInstance();
@@ -53,14 +51,18 @@ public class RegistrationForm extends FormLayout {
         team.setItems(teamService.getAllTeams());
         team.setItemLabelGenerator(Team::getName);
         team.setAllowCustomValue(true);
+        password.setHelperText(
+                "A password must be at least 8 characters. It has to have at least one letter and one digit.");
+        password.setPattern("^(?=.*[0-9])(?=.*[a-zA-Z]).{8}.*$");
+        password.setErrorMessage("Not a valid password");
 
         setRequiredIndicatorVisible(firstName, lastName, email, emailConfirm,
-                password, sex, passwordConfirm, city);
+                password, sex, passwordConfirm, birthDate, city);
 
         submitButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        add(title, firstName, lastName, email, emailConfirm, sex, team, postalCode, city,
-                birthDate, password, passwordConfirm, errorMessageField, submitButton);
+        add(title, firstName, lastName, email, emailConfirm, sex, birthDate, team, postalCode, city,
+                password, passwordConfirm, errorMessageField, submitButton);
 
         setMaxWidth("500px");
         setResponsiveSteps(
@@ -69,6 +71,9 @@ public class RegistrationForm extends FormLayout {
 
         setColspan(title, 2);
         setColspan(errorMessageField, 2);
+        setColspan(email, 2);
+        setColspan(emailConfirm, 2);
+        setColspan(team, 2);
         setColspan(submitButton, 2);
     }
 

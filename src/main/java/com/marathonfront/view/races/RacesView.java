@@ -1,2 +1,4 @@
-package com.marathonfront.view.races;public class RacesView {
+package com.marathonfront.view.races;
+
+public class RacesView {
 }

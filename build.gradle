@@ -19,6 +19,7 @@ ext {
 
 dependencies {
     implementation 'com.vaadin:vaadin-spring-boot-starter'
+    implementation 'com.google.code.gson:gson'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -33,3 +34,5 @@ dependencyManagement {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+

@@ -1,4 +1,4 @@
-package com.marathonfront.view.registration;
+package com.marathonfront.service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
