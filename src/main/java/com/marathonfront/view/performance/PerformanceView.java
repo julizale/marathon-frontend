@@ -3,6 +3,7 @@ package com.marathonfront.view.performance;
 import com.marathonfront.domain.Performance;
 import com.marathonfront.service.PerformanceService;
 import com.marathonfront.view.MainView;
+import com.marathonfront.view.user.UserFormBinder;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -31,6 +32,9 @@ public class PerformanceView extends VerticalLayout {
         setSizeFull();
         refresh();
         grid.asSingleSelect().addValueChangeListener(event -> performanceForm.setPerformance(grid.asSingleSelect().getValue()));
+
+        PerformanceFormBinder performanceFormBinder = new PerformanceFormBinder(performanceForm);
+        performanceFormBinder.addBindingAndValidation();
     }
 
     public void refresh() {

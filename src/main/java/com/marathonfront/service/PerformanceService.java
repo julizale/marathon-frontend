@@ -58,6 +58,7 @@ public class PerformanceService {
 
         HttpEntity<String> entity = new HttpEntity<>(jsonContent, headers);
         LOGGER.info("Sending request to save performance");
+        LOGGER.info("JSON: \n" + jsonContent);
         try {
             restTemplate.postForObject(url, entity, String.class);
             LOGGER.info("Performance saved successfully.");

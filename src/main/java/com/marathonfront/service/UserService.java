@@ -3,6 +3,7 @@ package com.marathonfront.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.marathonfront.config.ApiConfig;
+import com.marathonfront.domain.Team;
 import com.marathonfront.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,16 @@ public class UserService {
     private UserService() {
         restTemplate = new RestTemplate();
     }
+
+    public User getUser(long id) {
+        try {
+            return restTemplate.getForObject(url + "/" + id, User.class);
+        } catch (RestClientException e) {
+            LOGGER.error(e.getMessage(), e);
+            return new User();
+        }
+    }
+
     public List<User> getAllUsers() {
 
         try {

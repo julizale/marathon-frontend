@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.marathonfront.config.ApiConfig;
 import com.marathonfront.domain.Race;
 import com.marathonfront.domain.Team;
+import com.marathonfront.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -33,6 +34,16 @@ public class RaceService {
     private RaceService() {
         restTemplate = new RestTemplate();
     }
+
+    public Race getRace(long id) {
+        try {
+            return restTemplate.getForObject(url + "/" + id, Race.class);
+        } catch (RestClientException e) {
+            LOGGER.error(e.getMessage(), e);
+            return new Race();
+        }
+    }
+
     public List<Race> getAllRaces() {
 
         try {

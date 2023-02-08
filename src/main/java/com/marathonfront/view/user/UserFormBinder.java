@@ -47,6 +47,7 @@ public class UserFormBinder {
         binder.forField(userForm.getSex())
                 .withValidator(this::sexValidator).bind("sex");
         binder.forField(userForm.getTeam())
+                .withValidator(this::teamValidator)
                 .withConverter(Team::getId, teamService::getTeam)
                 .bind("teamId");
 
@@ -81,9 +82,11 @@ public class UserFormBinder {
         Matcher matcher = pattern.matcher(email);
         if (!matcher.matches()) {
             return ValidationResult.error("This doesn't seem to be valid email address.");
-        } else {
-            return ValidationResult.ok();
         }
+        if (userService.getAllUsers().stream().anyMatch(u -> u.getEmail().equals(email))) {
+            return ValidationResult.error("User identified with given email already exists.");
+        }
+        return ValidationResult.ok();
     }
 
     private ValidationResult nameValidator(String name, ValueContext ctx) {
@@ -106,6 +109,14 @@ public class UserFormBinder {
 
     private ValidationResult sexValidator(Sex sex, ValueContext ctx) {
         if (sex == null) {
+            return ValidationResult.error("Field must not be null");
+        } else {
+            return ValidationResult.ok();
+        }
+    }
+
+    private ValidationResult teamValidator(Team team, ValueContext ctx) {
+        if (team == null) {
             return ValidationResult.error("Field must not be null");
         } else {
             return ValidationResult.ok();
