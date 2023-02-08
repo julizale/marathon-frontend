@@ -3,7 +3,8 @@ package com.marathonfront.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.marathonfront.config.ApiConfig;
-import com.marathonfront.domain.Team;
+import com.marathonfront.domain.Performance;
+import com.marathonfront.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -12,30 +13,31 @@ import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.util.*;
 
-public class TeamService {
+public class PerformanceService {
 
-    private static TeamService teamService;
+    private static PerformanceService performanceService;
     private final RestTemplate restTemplate;
-    private static final Logger LOGGER = LoggerFactory.getLogger(TeamService.class);
-    private final String url = ApiConfig.apiUrl + "team";
+    private static final Logger LOGGER = LoggerFactory.getLogger(PerformanceService.class);
+    private final String url = ApiConfig.apiUrl + "performance";
 
-    public static TeamService getInstance() {
-        if (teamService == null) {
-            teamService = new TeamService();
+    public static PerformanceService getInstance() {
+        if (performanceService == null) {
+            performanceService = new PerformanceService();
         }
-        return teamService;
+        return performanceService;
     }
 
-    private TeamService() {
+    private PerformanceService() {
         restTemplate = new RestTemplate();
     }
-    public List<Team> getAllTeams() {
+    public List<Performance> getAllPerformances() {
 
         try {
-            Team[] teamsResponse = restTemplate.getForObject(url, Team[].class);
-            return new ArrayList<>(Optional.ofNullable(teamsResponse)
+            Performance[] perfResponse = restTemplate.getForObject(url, Performance[].class);
+            return new ArrayList<>(Optional.ofNullable(perfResponse)
                     .map(Arrays::asList)
                     .orElse(Collections.emptyList()));
         } catch (RestClientException e) {
@@ -44,35 +46,27 @@ public class TeamService {
         }
     }
 
-    public Team getTeam(long teamId) {
-        try {
-            return restTemplate.getForObject(url + "/" + teamId, Team.class);
-        } catch (RestClientException e) {
-            LOGGER.error(e.getMessage(), e);
-            return new Team();
-        }
-    }
-
-    public void createNewTeam(Team team) {
+    public void savePerformance(Performance performance) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
                 .create();
-        String jsonContent = gson.toJson(team);
+        String jsonContent = gson.toJson(performance);
 
         HttpEntity<String> entity = new HttpEntity<>(jsonContent, headers);
-        LOGGER.info("Sending request to save team");
+        LOGGER.info("Sending request to save performance");
         try {
             restTemplate.postForObject(url, entity, String.class);
-            LOGGER.info("Team saved successfully");
+            LOGGER.info("Performance saved successfully.");
         } catch (RestClientException e) {
             LOGGER.error("Rest client exception: " + e.getMessage(), e);
         }
     }
 
-    public void delete(Team team) {
-
+    public void delete(Performance performance) {
+        restTemplate.delete(url + "/" + performance.getId());
     }
 }

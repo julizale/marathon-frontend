@@ -2,6 +2,7 @@ package com.marathonfront.view.user;
 
 import com.marathonfront.domain.User;
 import com.marathonfront.service.UserService;
+import com.marathonfront.view.MainView;
 import com.marathonfront.view.registration.RegistrationFormBinder;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -9,7 +10,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
-@Route("user")
+@Route(value = "user", layout = MainView.class)
 public class UserView extends VerticalLayout {
 
     private final UserService userService = UserService.getInstance();

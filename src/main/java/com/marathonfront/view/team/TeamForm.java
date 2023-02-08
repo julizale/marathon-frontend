@@ -21,7 +21,7 @@ public class TeamForm extends FormLayout {
 
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
-    private Binder<Team> binder = new Binder<Team>(Team.class);
+    private Binder<Team> binder = new Binder<>(Team.class);
 
     public TeamForm(TeamView teamView) {
         HorizontalLayout buttons = new HorizontalLayout(save, delete);
@@ -57,4 +57,5 @@ public class TeamForm extends FormLayout {
             name.focus();
         }
     }
+
 }

@@ -1,27 +1,58 @@
 package com.marathonfront.view;
 
-import com.marathonfront.domain.User;
-import com.marathonfront.service.UserService;
-import com.vaadin.flow.component.grid.Grid;
+import com.marathonfront.view.performance.PerformanceView;
+import com.marathonfront.view.race.RaceView;
+import com.marathonfront.view.team.TeamView;
+import com.marathonfront.view.user.UserView;
+import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.HighlightConditions;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLink;
 
 @Route
-@PageTitle("Marathon")
-public class MainView extends VerticalLayout {
-
-    private final UserService userService = UserService.getInstance();
-    private Grid<User> grid = new Grid<>(User.class);
+public class MainView extends AppLayout {
 
     public MainView() {
-        grid.setColumns("id", "email", "firstName", "lastName", "birthDate", "sex", "city");
-        add(grid);
-        setSizeFull();
-        refresh();
+        createHeader();
+        createDrawer();
     }
 
-    public void refresh() {
-        grid.setItems(userService.getAllUsers());
+    private void createHeader() {
+        H2 logo = new H2("Marathon");
+        logo.addClassNames("text-l", "m-m");
+
+        HorizontalLayout header = new HorizontalLayout(
+                new DrawerToggle(),
+                logo
+        );
+
+        header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
+        header.setWidth("100%");
+        header.addClassNames("py-0", "px-m");
+
+        addToNavbar(header);
+    }
+
+    private void createDrawer() {
+        RouterLink userLink = new RouterLink("User", UserView.class);
+        userLink.setHighlightCondition(HighlightConditions.sameLocation());
+        addToDrawer(new VerticalLayout(userLink));
+
+        RouterLink teamLink = new RouterLink("Team", TeamView.class);
+        teamLink.setHighlightCondition(HighlightConditions.sameLocation());
+        addToDrawer(new VerticalLayout(teamLink));
+
+        RouterLink raceLink = new RouterLink("Race", RaceView.class);
+        raceLink.setHighlightCondition(HighlightConditions.sameLocation());
+        addToDrawer(new VerticalLayout(raceLink));
+
+        RouterLink performanceLink = new RouterLink("Performance", PerformanceView.class);
+        performanceLink.setHighlightCondition(HighlightConditions.sameLocation());
+        addToDrawer(new VerticalLayout(performanceLink));
     }
 }

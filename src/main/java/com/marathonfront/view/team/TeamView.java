@@ -2,13 +2,14 @@ package com.marathonfront.view.team;
 
 import com.marathonfront.domain.Team;
 import com.marathonfront.service.TeamService;
+import com.marathonfront.view.MainView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
-@Route("team")
+@Route(value = "team", layout = MainView.class)
 public class TeamView extends VerticalLayout {
 
     private final TeamService teamService = TeamService.getInstance();
