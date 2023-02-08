@@ -51,9 +51,6 @@ public class RegistrationForm extends FormLayout {
         team.setItems(teamService.getAllTeams());
         team.setItemLabelGenerator(Team::getName);
         team.setAllowCustomValue(true);
-        password.setHelperText(
-                "A password must be at least 8 characters. It has to have at least one letter and one digit.");
-        password.setPattern("^(?=.*[0-9])(?=.*[a-zA-Z]).{8}.*$");
         password.setErrorMessage("Not a valid password");
 
         setRequiredIndicatorVisible(firstName, lastName, email, emailConfirm,

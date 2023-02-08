@@ -44,6 +44,15 @@ public class TeamService {
         }
     }
 
+    public Team getTeam(long teamId) {
+        try {
+            return restTemplate.getForObject(url + "/" + teamId, Team.class);
+        } catch (RestClientException e) {
+            LOGGER.error(e.getMessage(), e);
+            return new Team();
+        }
+    }
+
     public void createNewTeam(Team team) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

@@ -45,7 +45,7 @@ public class UserService {
         }
     }
 
-    public void createUser(User user) {
+    public void saveUser(User user) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -63,10 +63,9 @@ public class UserService {
         } catch (RestClientException e) {
             LOGGER.error("Rest client exception: " + e.getMessage(), e);
         }
-
     }
 
     public void delete(User user) {
-
+        restTemplate.delete(url + "/" + user.getId());
     }
 }

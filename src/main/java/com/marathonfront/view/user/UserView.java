@@ -2,6 +2,7 @@ package com.marathonfront.view.user;
 
 import com.marathonfront.domain.User;
 import com.marathonfront.service.UserService;
+import com.marathonfront.view.registration.RegistrationFormBinder;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -30,6 +31,9 @@ public class UserView extends VerticalLayout {
         setSizeFull();
         refresh();
         grid.asSingleSelect().addValueChangeListener(event -> userForm.setUser(grid.asSingleSelect().getValue()));
+
+        UserFormBinder userFormBinder = new UserFormBinder(userForm);
+        userFormBinder.addBindingAndValidation();
     }
 
     public void refresh() {

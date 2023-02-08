@@ -49,7 +49,7 @@ public class RegistrationFormBinder {
             try {
                 User userBean = new User();
                 binder.writeBean(userBean);
-                userService.createUser(userBean);
+                userService.saveUser(userBean);
                 showSuccess(userBean);
             } catch (ValidationException exception) {
                 LOGGER.warn("Validation exception: " + exception.getMessage());

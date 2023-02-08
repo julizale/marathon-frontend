@@ -10,10 +10,14 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import lombok.Getter;
 
+@Getter
 public class UserForm extends FormLayout {
 
     private UserView userView;
@@ -27,30 +31,23 @@ public class UserForm extends FormLayout {
     private DatePicker birthDate = new DatePicker("Date of birth");
     private ComboBox<Sex> sex = new ComboBox<>("Sex");
     private ComboBox<Team> team = new ComboBox<>("Team");
-    private TextField password = new TextField("Password");
+    private PasswordField password = new PasswordField("Password");
 
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
+    private Span errorMessageField = new Span();
     private Binder<User> binder = new Binder<>(User.class);
 
     public UserForm(UserView userView) {
         HorizontalLayout buttons = new HorizontalLayout(save, delete);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        save.addClickListener(event -> save());
         delete.addClickListener(event -> delete());
         sex.setItems(Sex.values());
         team.setItems(teamService.getAllTeams());
         team.setItemLabelGenerator(Team::getName);
-        add(email, firstName, lastName, city, birthDate, sex, team, password, buttons);
+        add(email, firstName, lastName, city, birthDate, sex, team, password, errorMessageField, buttons);
         binder.bindInstanceFields(this);
         this.userView = userView;
-    }
-
-    private void save(){
-        User user = binder.getBean();
-        userService.createUser(user);
-        userView.refresh();
-        setUser(null);
     }
 
     private void delete(){
