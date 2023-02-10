@@ -67,16 +67,22 @@ public class RaceService {
         String jsonContent = gson.toJson(race);
 
         HttpEntity<String> entity = new HttpEntity<String>(jsonContent, headers);
-        LOGGER.info("Sending request to create race");
+        LOGGER.info("Sending request to save race");
+        LOGGER.info(jsonContent);
         try {
             restTemplate.postForObject(url, entity, String.class);
-            LOGGER.info("New race created.");
+            LOGGER.info("Race saved.");
         } catch (RestClientException e) {
             LOGGER.error("Rest client exception: " + e.getMessage(), e);
         }
     }
 
     public void delete(Race race) {
-
+        try {
+            restTemplate.delete(url + "/" + race.getId());
+            LOGGER.info("Race deleted.");
+        } catch (RestClientException e) {
+            LOGGER.error("Rest client exception: " + e.getMessage(), e);
+        }
     }
 }

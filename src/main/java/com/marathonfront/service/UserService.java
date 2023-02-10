@@ -3,7 +3,6 @@ package com.marathonfront.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.marathonfront.config.ApiConfig;
-import com.marathonfront.domain.Team;
 import com.marathonfront.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,16 +66,22 @@ public class UserService {
         String jsonContent = gson.toJson(user);
 
         HttpEntity<String> entity = new HttpEntity<>(jsonContent, headers);
-        LOGGER.info("Sending request to create user");
+        LOGGER.info("Sending request to save user");
+        LOGGER.info(jsonContent);
         try {
             restTemplate.postForObject(url, entity, String.class);
-            LOGGER.info("New user created.");
+            LOGGER.info("User saved.");
         } catch (RestClientException e) {
             LOGGER.error("Rest client exception: " + e.getMessage(), e);
         }
     }
 
     public void delete(User user) {
-        restTemplate.delete(url + "/" + user.getId());
+        try {
+            restTemplate.delete(url + "/" + user.getId());
+            LOGGER.info("User deleted.");
+        } catch (RestClientException e) {
+            LOGGER.error("Rest client exception: " + e.getMessage(), e);
+        }
     }
 }

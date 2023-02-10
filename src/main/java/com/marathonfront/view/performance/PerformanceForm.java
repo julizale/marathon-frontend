@@ -64,10 +64,17 @@ public class PerformanceForm extends FormLayout {
     public void setPerformance(Performance performance) {
         binder.setBean(performance);
 
-        if (performance == null) {
+        if (performance == null ) {
             setVisible(false);
         } else {
             setVisible(true);
+            if (performance.getUserId() != 0) {
+                user.setValue(userService.getUser(performance.getUserId()));
+            }
+            if (performance.getRaceId() != 0) {
+                race.setValue(raceService.getRace(performance.getRaceId()));
+            }
+            status.setValue(performance.getStatus() == null ? StartStatus.DNS : performance.getStatus());
             user.focus();
         }
     }

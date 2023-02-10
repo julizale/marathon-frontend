@@ -45,17 +45,11 @@ public class PerformanceFormBinder {
         binder.forField(performanceForm.getStatus())
                 .withValidator(this::statusValidator).bind("status");
 
-
-//        binder.forField(userForm.getTeam())
-//                .withValidator(this::teamValidator)
-//                .withConverter(Team::getId, teamService::getTeam)
-//                .bind("teamId");
-
         binder.setStatusLabel(performanceForm.getErrorMessageField());
 
         performanceForm.getSave().addClickListener(event -> {
             try {
-                Performance performanceBean = new Performance();
+                Performance performanceBean = performanceForm.getBinder().getBean();
                 binder.writeBean(performanceBean);
                 performanceService.savePerformance(performanceBean);
                 performanceForm.getPerformanceView().refresh();
@@ -69,21 +63,16 @@ public class PerformanceFormBinder {
     private ValidationResult userValidator(User user, ValueContext ctx) {
         if (user == null) {
             return ValidationResult.error("Field must not be null");
-        } else {
-            return ValidationResult.ok();
         }
+        if (performanceService.getAllPerformances().stream().anyMatch(p -> p.getUserId() == user.getId())
+                && performanceForm.getBinder().getBean().getId() == 0) {
+            return ValidationResult.error("User is already assigned to another performance.");
+        }
+        return ValidationResult.ok();
     }
 
     private ValidationResult raceValidator(Race race, ValueContext ctx) {
         if (race == null) {
-            return ValidationResult.error("Field must not be null");
-        } else {
-            return ValidationResult.ok();
-        }
-    }
-
-    private ValidationResult raceValidator(Long id, ValueContext ctx) {
-        if (id == null) {
             return ValidationResult.error("Field must not be null");
         } else {
             return ValidationResult.ok();

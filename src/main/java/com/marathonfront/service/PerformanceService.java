@@ -58,7 +58,7 @@ public class PerformanceService {
 
         HttpEntity<String> entity = new HttpEntity<>(jsonContent, headers);
         LOGGER.info("Sending request to save performance");
-        LOGGER.info("JSON: \n" + jsonContent);
+        LOGGER.info(jsonContent);
         try {
             restTemplate.postForObject(url, entity, String.class);
             LOGGER.info("Performance saved successfully.");
@@ -68,6 +68,12 @@ public class PerformanceService {
     }
 
     public void delete(Performance performance) {
-        restTemplate.delete(url + "/" + performance.getId());
+        LOGGER.info("Sending request to delete performance");
+        try {
+            restTemplate.delete(url + "/" + performance.getId());
+            LOGGER.info("Performance deleted.");
+        } catch (RestClientException e) {
+            LOGGER.error("Rest client exception: " + e.getMessage(), e);
+        }
     }
 }

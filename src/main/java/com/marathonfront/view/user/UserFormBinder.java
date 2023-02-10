@@ -48,14 +48,15 @@ public class UserFormBinder {
                 .withValidator(this::sexValidator).bind("sex");
         binder.forField(userForm.getTeam())
                 .withValidator(this::teamValidator)
-                .withConverter(Team::getId, teamService::getTeam)
+                .withConverter(team -> team == null ? 0 : team.getId(),
+                        teamId -> teamId == 0 ? null : teamService.getTeam(teamId))
                 .bind("teamId");
 
         binder.setStatusLabel(userForm.getErrorMessageField());
 
         userForm.getSave().addClickListener(event -> {
             try {
-                User userBean = new User();
+                User userBean = userForm.getBinder().getBean();
                 binder.writeBean(userBean);
                 userService.saveUser(userBean);
                 userForm.getUserView().refresh();
@@ -83,8 +84,9 @@ public class UserFormBinder {
         if (!matcher.matches()) {
             return ValidationResult.error("This doesn't seem to be valid email address.");
         }
-        if (userService.getAllUsers().stream().anyMatch(u -> u.getEmail().equals(email))) {
-            return ValidationResult.error("User identified with given email already exists.");
+        if (userService.getAllUsers().stream().anyMatch(u -> u.getEmail().equals(email))
+                && userForm.getBinder().getBean().getId() == null) {
+            return ValidationResult.error("User identified with this email already exists in database.");
         }
         return ValidationResult.ok();
     }
@@ -117,10 +119,10 @@ public class UserFormBinder {
 
     private ValidationResult teamValidator(Team team, ValueContext ctx) {
         if (team == null) {
-            return ValidationResult.error("Field must not be null");
-        } else {
-            return ValidationResult.ok();
+
+//            return ValidationResult.error("Field must not be null");
         }
+        return ValidationResult.ok();
     }
 
     private void showSuccess(User userBean) {

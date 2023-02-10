@@ -1,10 +1,7 @@
 package com.marathonfront.view.team;
 
-import com.marathonfront.domain.Race;
 import com.marathonfront.domain.Team;
-import com.marathonfront.service.RaceService;
 import com.marathonfront.service.TeamService;
-import com.marathonfront.view.race.RaceView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -35,7 +32,7 @@ public class TeamForm extends FormLayout {
 
     private void save(){
         Team team = binder.getBean();
-        teamService.createNewTeam(team);
+        teamService.saveTeam(team);
         teamView.refresh();
         setTeam(null);
     }

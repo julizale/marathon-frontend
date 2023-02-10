@@ -64,6 +64,9 @@ public class UserForm extends FormLayout {
             setVisible(false);
         } else {
             setVisible(true);
+            if (user.getTeamId() != 0) {
+                team.setValue(teamService.getTeam(user.getTeamId()));
+            }
             email.focus();
         }
     }

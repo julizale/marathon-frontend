@@ -53,7 +53,7 @@ public class TeamService {
         }
     }
 
-    public void createNewTeam(Team team) {
+    public void saveTeam(Team team) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -64,6 +64,7 @@ public class TeamService {
 
         HttpEntity<String> entity = new HttpEntity<>(jsonContent, headers);
         LOGGER.info("Sending request to save team");
+        LOGGER.info(jsonContent);
         try {
             restTemplate.postForObject(url, entity, String.class);
             LOGGER.info("Team saved successfully");
@@ -73,6 +74,11 @@ public class TeamService {
     }
 
     public void delete(Team team) {
-
+        try {
+            restTemplate.delete(url + "/" + team.getId());
+            LOGGER.info("Team deleted.");
+        } catch (RestClientException e) {
+            LOGGER.error("Rest client exception: " + e.getMessage(), e);
+        }
     }
 }
