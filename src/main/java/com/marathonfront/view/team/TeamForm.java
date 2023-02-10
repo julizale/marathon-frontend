@@ -5,16 +5,20 @@ import com.marathonfront.service.TeamService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import lombok.Getter;
 
+@Getter
 public class TeamForm extends FormLayout {
 
     private TeamView teamView;
     private TeamService teamService = TeamService.getInstance();
 
     private TextField name = new TextField("Name");
+    private Span errorMessageField = new Span();
 
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
@@ -23,18 +27,10 @@ public class TeamForm extends FormLayout {
     public TeamForm(TeamView teamView) {
         HorizontalLayout buttons = new HorizontalLayout(save, delete);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        save.addClickListener(event -> save());
         delete.addClickListener(event -> delete());
-        add(name, buttons);
+        add(name, errorMessageField, buttons);
         binder.bindInstanceFields(this);
         this.teamView = teamView;
-    }
-
-    private void save(){
-        Team team = binder.getBean();
-        teamService.saveTeam(team);
-        teamView.refresh();
-        setTeam(null);
     }
 
     private void delete(){
@@ -54,5 +50,4 @@ public class TeamForm extends FormLayout {
             name.focus();
         }
     }
-
 }

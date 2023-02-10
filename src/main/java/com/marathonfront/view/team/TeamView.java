@@ -31,9 +31,13 @@ public class TeamView extends VerticalLayout {
         setSizeFull();
         refresh();
         grid.asSingleSelect().addValueChangeListener(event -> teamForm.setTeam(grid.asSingleSelect().getValue()));
+
+        TeamFormBinder teamFormBinder = new TeamFormBinder(teamForm);
+        teamFormBinder.addBindingAndValidation();
     }
 
     public void refresh() {
         grid.setItems(teamService.getAllTeams());
     }
+
 }

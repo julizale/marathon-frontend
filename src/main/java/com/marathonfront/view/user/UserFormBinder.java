@@ -95,7 +95,7 @@ public class UserFormBinder {
         Pattern pattern = Pattern.compile("^[^- '](?=(?!\\p{Lu}?\\p{Lu}))(?=(?!\\p{Ll}+\\p{Lu}))(?=(?!.*\\p{Lu}\\p{Lu}))(?=(?!.*[- '][- '.]))(?=(?!.*[.][-'.]))(\\p{L}|[- '.]){2,}$");
         Matcher matcher = pattern.matcher(name);
         if (!matcher.matches()) {
-            return ValidationResult.error("Name should be 1-25 characters containing only letters and \'-\'");
+            return ValidationResult.error("Name should be 3-25 characters containing only letters and \'-\'");
         } else {
             return ValidationResult.ok();
         }

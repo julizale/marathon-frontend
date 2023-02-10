@@ -4,8 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.marathonfront.config.ApiConfig;
 import com.marathonfront.domain.Race;
-import com.marathonfront.domain.Team;
-import com.marathonfront.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -14,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDate;
 import java.util.*;
 
 public class RaceService {
@@ -57,7 +54,7 @@ public class RaceService {
         }
     }
 
-    public void createNewRace(Race race) {
+    public void saveRace(Race race) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 

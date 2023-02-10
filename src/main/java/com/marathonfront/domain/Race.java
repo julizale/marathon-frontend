@@ -9,6 +9,6 @@ public class Race {
 
     private long id;
     private String name;
-    private long distance;
+    private Integer distance;
     private BigDecimal price;
 }

@@ -31,6 +31,9 @@ public class RaceView extends VerticalLayout {
         setSizeFull();
         refresh();
         grid.asSingleSelect().addValueChangeListener(event -> raceForm.setRace(grid.asSingleSelect().getValue()));
+
+        RaceFormBinder raceFormBinder = new RaceFormBinder(raceForm);
+        raceFormBinder.addBindingAndValidation();
     }
 
     public void refresh() {
