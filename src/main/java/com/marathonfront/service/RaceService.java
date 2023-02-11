@@ -19,7 +19,7 @@ public class RaceService {
     private static RaceService raceService;
     private final RestTemplate restTemplate;
     private static final Logger LOGGER = LoggerFactory.getLogger(RaceService.class);
-    private final String url = ApiConfig.apiUrl + "race";
+    private final String url = ApiConfig.backendUrl + "race";
 
     public static RaceService getInstance() {
         if (raceService == null) {
@@ -63,7 +63,7 @@ public class RaceService {
                 .create();
         String jsonContent = gson.toJson(race);
 
-        HttpEntity<String> entity = new HttpEntity<String>(jsonContent, headers);
+        HttpEntity<String> entity = new HttpEntity<>(jsonContent, headers);
         LOGGER.info("Sending request to save race");
         LOGGER.info(jsonContent);
         try {

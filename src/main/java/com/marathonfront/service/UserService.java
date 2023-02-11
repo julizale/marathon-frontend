@@ -20,7 +20,7 @@ public class UserService {
     private static UserService userService;
     private final RestTemplate restTemplate;
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
-    private final String url = ApiConfig.apiUrl + "user";
+    private final String url = ApiConfig.backendUrl + "user";
 
     public static UserService getInstance() {
         if (userService == null) {

@@ -34,16 +34,16 @@ public class PerformanceFormBinder {
                 .withValidator(this::userValidator)
                 .withConverter(User::getId, userService::getUser)
                 .bind("userId");
-
         binder.forField(performanceForm.getRace())
                 .withValidator(this::raceValidator)
                 .withConverter(Race::getId, raceService::getRace)
                 .bind("raceId");
-
         binder.forField(performanceForm.getPaid())
                 .withValidator(this::paidValidator).bind("paid");
         binder.forField(performanceForm.getStatus())
                 .withValidator(this::statusValidator).bind("status");
+        binder.forField(performanceForm.getBibNumber())
+                .withValidator(this::bibNumberValidator).bind("bibNumber");
 
         binder.setStatusLabel(performanceForm.getErrorMessageField());
 
@@ -58,6 +58,23 @@ public class PerformanceFormBinder {
                 LOGGER.warn("Validation exception: " + exception.getMessage());
             }
         });
+    }
+
+    private ValidationResult bibNumberValidator(Integer bibNumber, ValueContext valueContext) {
+        if (bibNumber == null) {
+            return ValidationResult.error("Field must not be null. Enter 0 if number's not assigned yet");
+        }
+        if (bibNumber < 0) {
+            return ValidationResult.error("Start number cannot be lower than zero");
+        }
+        if (bibNumber != 0 &&
+                performanceForm.getRace().getValue() != null &&
+                performanceService.getAllPerformances().stream()
+                .filter(p -> p.getRaceId() == performanceForm.getRace().getValue().getId())
+                        .anyMatch(p -> p.getBibNumber() == bibNumber)) {
+            return ValidationResult.error("This number is assigned to another user taking part in this race.");
+        }
+        return ValidationResult.ok();
     }
 
     private ValidationResult userValidator(User user, ValueContext ctx) {

@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.marathonfront.config.ApiConfig;
 import com.marathonfront.domain.Performance;
-import com.marathonfront.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -21,7 +20,7 @@ public class PerformanceService {
     private static PerformanceService performanceService;
     private final RestTemplate restTemplate;
     private static final Logger LOGGER = LoggerFactory.getLogger(PerformanceService.class);
-    private final String url = ApiConfig.apiUrl + "performance";
+    private final String url = ApiConfig.backendUrl + "performance";
 
     public static PerformanceService getInstance() {
         if (performanceService == null) {

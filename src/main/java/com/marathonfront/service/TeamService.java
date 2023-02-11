@@ -19,7 +19,7 @@ public class TeamService {
     private static TeamService teamService;
     private final RestTemplate restTemplate;
     private static final Logger LOGGER = LoggerFactory.getLogger(TeamService.class);
-    private final String url = ApiConfig.apiUrl + "team";
+    private final String url = ApiConfig.backendUrl + "team";
 
     public static TeamService getInstance() {
         if (teamService == null) {

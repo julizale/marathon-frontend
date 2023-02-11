@@ -47,7 +47,6 @@ public class UserFormBinder {
         binder.forField(userForm.getSex())
                 .withValidator(this::sexValidator).bind("sex");
         binder.forField(userForm.getTeam())
-                .withValidator(this::teamValidator)
                 .withConverter(team -> team == null ? 0 : team.getId(),
                         teamId -> teamId == 0 ? null : teamService.getTeam(teamId))
                 .bind("teamId");
@@ -115,14 +114,6 @@ public class UserFormBinder {
         } else {
             return ValidationResult.ok();
         }
-    }
-
-    private ValidationResult teamValidator(Team team, ValueContext ctx) {
-        if (team == null) {
-
-//            return ValidationResult.error("Field must not be null");
-        }
-        return ValidationResult.ok();
     }
 
     private void showSuccess(User userBean) {

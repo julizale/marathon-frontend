@@ -3,6 +3,7 @@ package com.marathonfront.view.user;
 import com.marathonfront.domain.Sex;
 import com.marathonfront.domain.Team;
 import com.marathonfront.domain.User;
+import com.marathonfront.service.PostalCodeService;
 import com.marathonfront.service.TeamService;
 import com.marathonfront.service.UserService;
 import com.vaadin.flow.component.button.Button;
@@ -17,6 +18,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import lombok.Getter;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Getter
 public class UserForm extends FormLayout {
 
@@ -28,6 +32,7 @@ public class UserForm extends FormLayout {
     private TextField firstName = new TextField("First Name");
     private TextField lastName = new TextField("Last Name");
     private TextField city = new TextField("City");
+    private TextField postalCode = new TextField("Postal Code");
     private DatePicker birthDate = new DatePicker("Date of birth");
     private ComboBox<Sex> sex = new ComboBox<>("Sex");
     private ComboBox<Team> team = new ComboBox<>("Team");
@@ -42,10 +47,11 @@ public class UserForm extends FormLayout {
         HorizontalLayout buttons = new HorizontalLayout(save, delete);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         delete.addClickListener(event -> delete());
+        postalCode.addValueChangeListener(event -> getPostalUpdateCity());
         sex.setItems(Sex.values());
         team.setItems(teamService.getAllTeams());
         team.setItemLabelGenerator(Team::getName);
-        add(email, firstName, lastName, city, birthDate, sex, team, password, errorMessageField, buttons);
+        add(email, firstName, lastName,  birthDate, postalCode, city, sex, team, password, errorMessageField, buttons);
         binder.bindInstanceFields(this);
         this.userView = userView;
     }
@@ -64,10 +70,20 @@ public class UserForm extends FormLayout {
             setVisible(false);
         } else {
             setVisible(true);
-            if (user.getTeamId() != 0) {
-                team.setValue(teamService.getTeam(user.getTeamId()));
-            }
+            team.setValue(user.getTeamId() != 0 ?
+                    teamService.getTeam(user.getTeamId()) : null);
+            postalCode.setValue("");
             email.focus();
+        }
+    }
+
+    private void getPostalUpdateCity() {
+        String code = postalCode.getValue();
+        Pattern pattern = Pattern.compile("\\d{2}-\\d{3}");
+        Matcher matcher = pattern.matcher(code);
+        if (matcher.matches()) {
+            String retrievedCity = PostalCodeService.getInstance().getCity(code);
+            city.setValue(retrievedCity);
         }
     }
 }

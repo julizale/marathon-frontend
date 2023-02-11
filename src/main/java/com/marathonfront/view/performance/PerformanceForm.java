@@ -10,6 +10,7 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class PerformanceForm extends FormLayout {
     private ComboBox<User> user = new ComboBox<>("User");
     private ComboBox<Race> race = new ComboBox<>("Race");
     private ComboBox<Boolean> paid = new ComboBox<>("Paid");
-    private TextField bibNumber = new TextField("Bib number");
+    private IntegerField bibNumber = new IntegerField("Bib number");
     private ComboBox<StartStatus> status = new ComboBox<>("Status");
     private TextField timeGross = new TextField("Time gross");
     private TextField timeNet = new TextField("Time netto");
@@ -68,13 +69,12 @@ public class PerformanceForm extends FormLayout {
             setVisible(false);
         } else {
             setVisible(true);
-            if (performance.getUserId() != 0) {
-                user.setValue(userService.getUser(performance.getUserId()));
-            }
-            if (performance.getRaceId() != 0) {
-                race.setValue(raceService.getRace(performance.getRaceId()));
-            }
-            status.setValue(performance.getStatus() == null ? StartStatus.DNS : performance.getStatus());
+            user.setValue(performance.getUserId() != 0 ?
+                    userService.getUser(performance.getUserId()) : null);
+            race.setValue(performance.getRaceId() != 0 ?
+                    raceService.getRace(performance.getRaceId()) : null);
+            status.setValue(performance.getStatus() == null ?
+                    StartStatus.DNS : performance.getStatus());
             user.focus();
         }
     }
