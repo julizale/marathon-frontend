@@ -1,8 +1,8 @@
 package com.marathonfront.domain;
 
+import com.marathonfront.domain.enumerated.Sex;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Data

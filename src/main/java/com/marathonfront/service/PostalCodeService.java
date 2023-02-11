@@ -1,7 +1,7 @@
 package com.marathonfront.service;
 
 import com.marathonfront.config.ApiConfig;
-import com.marathonfront.domain.PostalApiAnswer;
+import com.marathonfront.domain.postal.PostalApiAnswer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;

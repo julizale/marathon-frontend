@@ -1,4 +1,4 @@
-package com.marathonfront.domain;
+package com.marathonfront.domain.postal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

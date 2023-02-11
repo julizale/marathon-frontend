@@ -1,5 +1,6 @@
 package com.marathonfront.domain;
 
+import com.marathonfront.domain.enumerated.StartStatus;
 import lombok.Data;
 
 import java.math.BigDecimal;

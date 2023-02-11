@@ -1,6 +1,6 @@
 package com.marathonfront.view.registration;
 
-import com.marathonfront.domain.Sex;
+import com.marathonfront.domain.enumerated.Sex;
 import com.marathonfront.domain.Team;
 import com.marathonfront.service.TeamService;
 import com.vaadin.flow.component.HasValueAndElement;

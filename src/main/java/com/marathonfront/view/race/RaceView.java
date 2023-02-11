@@ -5,6 +5,7 @@ import com.marathonfront.service.RaceService;
 import com.marathonfront.view.MainView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -16,6 +17,8 @@ public class RaceView extends VerticalLayout {
     private Grid<Race> grid = new Grid<>(Race.class);
     private RaceForm raceForm = new RaceForm(this);
     private Button addNewRace = new Button("Add new race");
+    private H4 instruction = new H4("To add a new team, click the button on the left." +
+            " To edit or delete a team, click it on the list.");
 
     public RaceView() {
         raceForm.setRace(null);
@@ -25,9 +28,10 @@ public class RaceView extends VerticalLayout {
         });
         grid.setColumns("name", "distance", "price");
         grid.setSizeFull();
+        HorizontalLayout upperPanel = new HorizontalLayout(addNewRace, instruction);
         HorizontalLayout mainContent = new HorizontalLayout(grid, raceForm);
         mainContent.setSizeFull();
-        add(addNewRace, mainContent);
+        add(upperPanel, mainContent);
         setSizeFull();
         refresh();
         grid.asSingleSelect().addValueChangeListener(event -> raceForm.setRace(grid.asSingleSelect().getValue()));

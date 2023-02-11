@@ -4,6 +4,7 @@ import com.marathonfront.view.performance.PerformanceView;
 import com.marathonfront.view.race.RaceView;
 import com.marathonfront.view.team.TeamView;
 import com.marathonfront.view.user.UserView;
+import com.marathonfront.view.weather.WeatherView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.H2;
@@ -54,5 +55,9 @@ public class MainView extends AppLayout {
         RouterLink performanceLink = new RouterLink("Performance", PerformanceView.class);
         performanceLink.setHighlightCondition(HighlightConditions.sameLocation());
         addToDrawer(new VerticalLayout(performanceLink));
+
+        RouterLink weatherLink = new RouterLink("Weather", WeatherView.class);
+        weatherLink.setHighlightCondition(HighlightConditions.sameLocation());
+        addToDrawer(new VerticalLayout(weatherLink));
     }
 }

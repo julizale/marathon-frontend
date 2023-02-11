@@ -1,6 +1,7 @@
 package com.marathonfront.view.performance;
 
 import com.marathonfront.domain.*;
+import com.marathonfront.domain.enumerated.StartStatus;
 import com.marathonfront.service.PerformanceService;
 import com.marathonfront.service.RaceService;
 import com.marathonfront.service.UserService;

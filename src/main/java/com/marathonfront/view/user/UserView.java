@@ -3,9 +3,9 @@ package com.marathonfront.view.user;
 import com.marathonfront.domain.User;
 import com.marathonfront.service.UserService;
 import com.marathonfront.view.MainView;
-import com.marathonfront.view.registration.RegistrationFormBinder;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -17,6 +17,8 @@ public class UserView extends VerticalLayout {
     private Grid<User> grid = new Grid<>(User.class);
     private UserForm userForm = new UserForm(this);
     private Button addNewUser = new Button("Add new user");
+    private H4 instruction = new H4("To add a new user, click the button on the left." +
+            " To edit or delete a user, click it on the list.");
 
     public UserView() {
         userForm.setUser(null);
@@ -26,9 +28,10 @@ public class UserView extends VerticalLayout {
         });
         grid.setColumns("email", "firstName", "lastName", "birthDate", "sex", "city", "teamId");
         grid.setSizeFull();
+        HorizontalLayout upperPanel = new HorizontalLayout(addNewUser, instruction);
         HorizontalLayout mainContent = new HorizontalLayout(grid, userForm);
         mainContent.setSizeFull();
-        add(addNewUser, mainContent);
+        add(upperPanel, mainContent);
         setSizeFull();
         refresh();
         grid.asSingleSelect().addValueChangeListener(event -> userForm.setUser(grid.asSingleSelect().getValue()));

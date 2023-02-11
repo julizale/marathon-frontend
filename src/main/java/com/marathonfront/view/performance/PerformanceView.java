@@ -5,6 +5,7 @@ import com.marathonfront.service.PerformanceService;
 import com.marathonfront.view.MainView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -16,6 +17,8 @@ public class PerformanceView extends VerticalLayout {
     private Grid<Performance> grid = new Grid<>(Performance.class);
     private PerformanceForm performanceForm = new PerformanceForm(this);
     private Button addUpdatePerformance = new Button("Add new performance");
+    private H4 instruction = new H4("To add a new performance, click the button on the left." +
+            " To edit or delete a performance, click it on the list.");
 
     public PerformanceView() {
         performanceForm.setPerformance(null);
@@ -25,9 +28,10 @@ public class PerformanceView extends VerticalLayout {
         });
         grid.setColumns("userId", "raceId", "paid", "bibNumber", "status", "timeGross", "timeNet");
         grid.setSizeFull();
+        HorizontalLayout upperPanel = new HorizontalLayout(addUpdatePerformance, instruction);
         HorizontalLayout mainContent = new HorizontalLayout(grid, performanceForm);
         mainContent.setSizeFull();
-        add(addUpdatePerformance, mainContent);
+        add(upperPanel, mainContent);
         setSizeFull();
         refresh();
         grid.asSingleSelect().addValueChangeListener(event -> performanceForm.setPerformance(grid.asSingleSelect().getValue()));

@@ -1,4 +1,4 @@
-package com.marathonfront.domain;
+package com.marathonfront.domain.enumerated;
 
 public enum StartStatus {
 

@@ -1,6 +1,6 @@
 package com.marathonfront.view.user;
 
-import com.marathonfront.domain.Sex;
+import com.marathonfront.domain.enumerated.Sex;
 import com.marathonfront.domain.Team;
 import com.marathonfront.domain.User;
 import com.marathonfront.service.PostalCodeService;
