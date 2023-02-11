@@ -17,8 +17,8 @@ public class RaceView extends VerticalLayout {
     private Grid<Race> grid = new Grid<>(Race.class);
     private RaceForm raceForm = new RaceForm(this);
     private Button addNewRace = new Button("Add new race");
-    private H4 instruction = new H4("To add a new team, click the button on the left." +
-            " To edit or delete a team, click it on the list.");
+    private H4 instruction = new H4("To add a new race, click the button on the left." +
+            " To edit or delete a race, click it on the list.");
 
     public RaceView() {
         raceForm.setRace(null);

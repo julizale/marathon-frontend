@@ -18,7 +18,7 @@ public class UserView extends VerticalLayout {
     private UserForm userForm = new UserForm(this);
     private Button addNewUser = new Button("Add new user");
     private H4 instruction = new H4("To add a new user, click the button on the left." +
-            " To edit or delete a user, click it on the list.");
+            " To edit or delete a user, click on the list.");
 
     public UserView() {
         userForm.setUser(null);

@@ -1,8 +1,10 @@
 package com.marathonfront.view.user;
 
+import com.marathonfront.domain.Race;
 import com.marathonfront.domain.enumerated.Sex;
 import com.marathonfront.domain.Team;
 import com.marathonfront.domain.User;
+import com.marathonfront.service.PerformanceService;
 import com.marathonfront.service.PostalCodeService;
 import com.marathonfront.service.TeamService;
 import com.marathonfront.service.UserService;
@@ -12,6 +14,8 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
@@ -58,6 +62,15 @@ public class UserForm extends FormLayout {
 
     private void delete(){
         User user = binder.getBean();
+
+        if (PerformanceService.getInstance().getAllPerformances().stream()
+                .anyMatch(p -> p.getUserId() == user.getId())) {
+            Notification notification = Notification.show("User has signed up for race!" +
+                    "Delete performance for this user first.");
+            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+            return;
+        }
+
         userService.delete(user);
         userView.refresh();
         setUser(null);

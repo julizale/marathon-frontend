@@ -54,6 +54,7 @@ public class PerformanceFormBinder {
                 binder.writeBean(performanceBean);
                 performanceService.savePerformance(performanceBean);
                 performanceForm.getPerformanceView().refresh();
+                performanceForm.setPerformance(null);
                 showSuccess(performanceBean);
             } catch (ValidationException exception) {
                 LOGGER.warn("Validation exception: " + exception.getMessage());
@@ -71,8 +72,9 @@ public class PerformanceFormBinder {
         if (bibNumber != 0 &&
                 performanceForm.getRace().getValue() != null &&
                 performanceService.getAllPerformances().stream()
-                .filter(p -> p.getRaceId() == performanceForm.getRace().getValue().getId())
-                        .anyMatch(p -> p.getBibNumber() == bibNumber)) {
+                        .filter(p -> p.getRaceId() == performanceForm.getRace().getValue().getId())
+                        .anyMatch(p -> p.getBibNumber() == bibNumber &&
+                                p.getUserId() != performanceForm.getUser().getValue().getId())) {
             return ValidationResult.error("This number is assigned to another user taking part in this race.");
         }
         return ValidationResult.ok();

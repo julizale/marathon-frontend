@@ -58,6 +58,7 @@ public class UserFormBinder {
                 binder.writeBean(userBean);
                 userService.saveUser(userBean);
                 userForm.getUserView().refresh();
+                userForm.setUser(null);
                 showSuccess(userBean);
             } catch (ValidationException exception) {
                 LOGGER.warn("Validation exception: " + exception.getMessage());

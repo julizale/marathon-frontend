@@ -46,6 +46,7 @@ public class RaceFormBinder {
                 binder.writeBean(raceBean);
                 raceService.saveRace(raceBean);
                 raceForm.getRaceView().refresh();
+                raceForm.setRace(null);
                 showSuccess(raceBean);
             } catch (ValidationException exception) {
                 LOGGER.warn("Validation exception: " + exception.getMessage());

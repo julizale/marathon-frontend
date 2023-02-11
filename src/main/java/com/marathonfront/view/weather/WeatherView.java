@@ -21,11 +21,12 @@ public class WeatherView extends VerticalLayout {
     private Grid<WeatherDay> grid = new Grid<>(WeatherDay.class);
     private DatePicker datePicker = new DatePicker("Marathon day");
     private H4 weatherInstruction = new H4("Select a race date (within the coming year) " +
-            "to see the weather on that date from the last 10 years.");
+            "to see the weather on that date from the last 10 years\n" +
+            "in Częstochowa, Poland, where the race will take place");
 
     public WeatherView() {
 
-        grid.setColumns("datetime", "temp", "feelslike", "precip", "windspeed");
+        grid.setColumns("date", "temperature", "feelslike", "preciptation", "windspeed");
         grid.setSizeFull();
         datePicker.setMin(LocalDate.now());
         datePicker.setMax(LocalDate.now().plusYears(1L));

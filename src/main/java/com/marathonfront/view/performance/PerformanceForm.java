@@ -11,8 +11,8 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.BigDecimalField;
 import com.vaadin.flow.component.textfield.IntegerField;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import lombok.Getter;
 
@@ -29,8 +29,8 @@ public class PerformanceForm extends FormLayout {
     private ComboBox<Boolean> paid = new ComboBox<>("Paid");
     private IntegerField bibNumber = new IntegerField("Bib number");
     private ComboBox<StartStatus> status = new ComboBox<>("Status");
-    private TextField timeGross = new TextField("Time gross");
-    private TextField timeNet = new TextField("Time netto");
+    private BigDecimalField timeGross = new BigDecimalField("Time gross");
+    private BigDecimalField timeNet = new BigDecimalField("Time netto");
     private Span errorMessageField = new Span();
 
     private Button save = new Button("Save");

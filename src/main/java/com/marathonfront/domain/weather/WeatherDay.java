@@ -11,16 +11,16 @@ import java.time.LocalDate;
 public class WeatherDay {
 
     @JsonProperty("datetime")
-    LocalDate datetime;
+    LocalDate date;
 
     @JsonProperty("temp")
-    double temp;
+    double temperature;
 
     @JsonProperty("feelslike")
     double feelslike;
 
     @JsonProperty("precip")
-    double precip;
+    double preciptation;
 
     @JsonProperty("windspeed")
     double windspeed;

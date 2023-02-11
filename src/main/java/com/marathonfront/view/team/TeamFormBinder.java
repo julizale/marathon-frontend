@@ -40,6 +40,7 @@ public class TeamFormBinder {
                 binder.writeBean(teamBean);
                 teamService.saveTeam(teamBean);
                 teamForm.getTeamView().refresh();
+                teamForm.setTeam(null);
                 showSuccess(teamBean);
             } catch (ValidationException exception) {
                 LOGGER.warn("Validation exception: " + exception.getMessage());

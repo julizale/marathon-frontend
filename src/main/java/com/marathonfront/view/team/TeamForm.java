@@ -1,11 +1,15 @@
 package com.marathonfront.view.team;
 
 import com.marathonfront.domain.Team;
+import com.marathonfront.service.PerformanceService;
 import com.marathonfront.service.TeamService;
+import com.marathonfront.service.UserService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
@@ -35,6 +39,14 @@ public class TeamForm extends FormLayout {
 
     private void delete(){
         Team team = binder.getBean();
+
+        if (UserService.getInstance().getAllUsers().stream()
+                .anyMatch(u -> u.getTeamId() == team.getId())) {
+            Notification notification = Notification.show("There are users assigned to this team!" +
+                    "Edit users data first.");
+            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+            return;
+        }
         teamService.delete(team);
         teamView.refresh();
         setTeam(null);

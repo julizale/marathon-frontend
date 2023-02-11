@@ -1,11 +1,14 @@
 package com.marathonfront.view.race;
 
 import com.marathonfront.domain.Race;
+import com.marathonfront.service.PerformanceService;
 import com.marathonfront.service.RaceService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.BigDecimalField;
 import com.vaadin.flow.component.textfield.IntegerField;
@@ -39,6 +42,14 @@ public class RaceForm extends FormLayout {
 
     private void delete(){
         Race race = binder.getBean();
+        if (PerformanceService.getInstance().getAllPerformances().stream()
+                .anyMatch(p -> p.getRaceId() == race.getId())) {
+            Notification notification = Notification.show("There are users signed up for this race!" +
+                    " Delete all performances for this race first.");
+            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+            return;
+        }
+
         raceService.delete(race);
         raceView.refresh();
         setRace(null);
