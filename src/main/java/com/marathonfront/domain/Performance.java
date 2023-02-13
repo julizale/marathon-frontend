@@ -12,7 +12,7 @@ public class Performance {
     private long userId;
     private long raceId;
     private boolean paid;
-    private int bibNumber;
+    private Integer bibNumber;
     private StartStatus status;
     private BigDecimal timeGross;
     private BigDecimal timeNet;

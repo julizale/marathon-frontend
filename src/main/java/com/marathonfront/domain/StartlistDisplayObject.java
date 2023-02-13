@@ -3,20 +3,15 @@ package com.marathonfront.domain;
 import com.marathonfront.domain.enumerated.Sex;
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
-public class User {
+public class StartlistDisplayObject {
 
-    private Long id;
-    private String email;
+    private Long performanceId;
+    private Integer bibNumber;
     private String firstName;
     private String lastName;
-    private LocalDate birthDate;
+    private int birthYear;
     private Sex sex;
     private String city;
-    private String password;
-    private Long teamId;
-    private Long performanceId;
-
+    private String teamName;
 }

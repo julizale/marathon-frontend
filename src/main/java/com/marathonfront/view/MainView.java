@@ -2,6 +2,7 @@ package com.marathonfront.view;
 
 import com.marathonfront.view.performance.PerformanceView;
 import com.marathonfront.view.race.RaceView;
+import com.marathonfront.view.startlist.StartListView;
 import com.marathonfront.view.team.TeamView;
 import com.marathonfront.view.user.UserView;
 import com.marathonfront.view.weather.WeatherView;
@@ -62,5 +63,9 @@ public class MainView extends AppLayout {
         RouterLink weatherLink = new RouterLink("Weather", WeatherView.class);
         weatherLink.setHighlightCondition(HighlightConditions.sameLocation());
         addToDrawer(new VerticalLayout(weatherLink));
+
+        RouterLink startListLink = new RouterLink("StartList", StartListView.class);
+        startListLink.setHighlightCondition(HighlightConditions.sameLocation());
+        addToDrawer(new VerticalLayout(startListLink));
     }
 }
