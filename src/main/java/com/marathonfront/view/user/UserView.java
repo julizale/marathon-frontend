@@ -18,7 +18,7 @@ public class UserView extends VerticalLayout {
     private UserForm userForm = new UserForm(this);
     private Button addNewUser = new Button("Add new user");
     private H4 instruction = new H4("To add a new user, click the button on the left." +
-            " To edit or delete a user, click on the list.");
+            " To edit or delete a user, click position on the list.");
 
     public UserView() {
         userForm.setUser(null);
@@ -26,7 +26,7 @@ public class UserView extends VerticalLayout {
             grid.asSingleSelect().clear();
             userForm.setUser(new User());
         });
-        grid.setColumns("email", "firstName", "lastName", "birthDate", "sex", "city", "teamId");
+        grid.setColumns("id", "email", "firstName", "lastName", "birthDate", "sex", "city", "teamId", "performanceId");
         grid.setSizeFull();
         HorizontalLayout upperPanel = new HorizontalLayout(addNewUser, instruction);
         HorizontalLayout mainContent = new HorizontalLayout(grid, userForm);

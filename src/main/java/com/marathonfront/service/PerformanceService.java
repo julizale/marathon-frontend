@@ -2,6 +2,7 @@ package com.marathonfront.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.marathonfront.adapter.LocalDateAdapter;
 import com.marathonfront.config.ApiConfig;
 import com.marathonfront.domain.Performance;
 import org.slf4j.Logger;

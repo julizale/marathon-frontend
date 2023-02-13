@@ -26,7 +26,7 @@ public class RaceView extends VerticalLayout {
             grid.asSingleSelect().clear();
             raceForm.setRace(new Race());
         });
-        grid.setColumns("name", "distance", "price");
+        grid.setColumns("id", "name", "distance", "price");
         grid.setSizeFull();
         HorizontalLayout upperPanel = new HorizontalLayout(addNewRace, instruction);
         HorizontalLayout mainContent = new HorizontalLayout(grid, raceForm);

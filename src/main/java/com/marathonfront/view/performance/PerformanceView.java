@@ -26,7 +26,7 @@ public class PerformanceView extends VerticalLayout {
             grid.asSingleSelect().clear();
             performanceForm.setPerformance(new Performance());
         });
-        grid.setColumns("userId", "raceId", "paid", "bibNumber", "status", "timeGross", "timeNet");
+        grid.setColumns("id", "userId", "raceId", "paid", "bibNumber", "status", "timeGross", "timeNet");
         grid.setSizeFull();
         HorizontalLayout upperPanel = new HorizontalLayout(addUpdatePerformance, instruction);
         HorizontalLayout mainContent = new HorizontalLayout(grid, performanceForm);

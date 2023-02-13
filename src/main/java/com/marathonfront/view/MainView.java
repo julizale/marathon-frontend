@@ -8,6 +8,7 @@ import com.marathonfront.view.weather.WeatherView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -24,8 +25,10 @@ public class MainView extends AppLayout {
     }
 
     private void createHeader() {
-        H2 logo = new H2("Marathon");
+        H2 logo = new H2();
         logo.addClassNames("text-l", "m-m");
+        Image image = new Image("images/marathon.png", "Marathon");
+        logo.add(image);
 
         HorizontalLayout header = new HorizontalLayout(
                 new DrawerToggle(),
