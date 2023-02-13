@@ -8,13 +8,19 @@
 
 ## General Information
 
-**Project Marathon** is the application that implements the functionality of web service for a hypothetical sporting event „Częstochowa Marathon”.
+**Project Marathon** is the application that provides functionality of web service for a nonexistent, hypothetical sporting event „Częstochowa Marathon”.
 Includes REST API to provide functionality for administration of the event. 
 There is also the frontend layer, implemented with the Vaadin library.
 
 ## Setup
+- Backend app is deployed to server, so is database with sample data to play with,
+so you can just launch frontend app. It starts locally on port **8090**
+
+
+if for some reason the server is down, you can follow the steps below:
 - link to backend: [https://github.com/julizale/marathon](https://github.com/julizale/marathon)
 - configure database connection in backend's `application.properties`
+- change backendUrl in frontend's `application.properties` : `backendUrl=http://localhost:8080/`
 - launch the backend application
 - launch frontend: application starts locally on port **8090**
 

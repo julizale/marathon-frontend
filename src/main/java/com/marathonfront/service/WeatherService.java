@@ -42,7 +42,7 @@ public class WeatherService {
     }
 
     private URI buildUrl(LocalDate date) {
-        return UriComponentsBuilder.fromHttpUrl(ApiConfig.weatherUrl1 + date + "/" + date)
+        return UriComponentsBuilder.fromHttpUrl(ApiConfig.weatherUrl + date + "/" + date)
                 .queryParam("unitGroup", "metric")
                 .queryParam("elements", "datetime,temp,feelslike,precip,preciptype,windspeed")
                 .queryParam("include", "days")

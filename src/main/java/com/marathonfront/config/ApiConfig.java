@@ -2,13 +2,27 @@ package com.marathonfront.config;
 
 import lombok.Getter;
 
+import java.io.IOException;
+import java.util.Properties;
+
 @Getter
 public class ApiConfig {
 
-    public static String backendUrl = "http://localhost:8080/v1/";
-    public static String postalCodeUrl = "http://kodpocztowy.intami.pl/api/";
-    public static String weatherUrl1 = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Częstochowa/";
-    public static String weatherKey = "J3PJ8E5CUGC7FFP99AJED9DPD";
+    static Properties conf;
 
+    static {
+        try {
+            conf = PropertiesLoader.loadProperties();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public static final String backendUrl = conf.getProperty("backendUrl");
+    public static final String postalCodeUrl = conf.getProperty("postalCodeUrl");
+    public static final String weatherUrl = conf.getProperty("weatherUrl");
+    public static final String weatherKey = conf.getProperty("weatherKey");
+
+    public ApiConfig() throws IOException {
+    }
 }
