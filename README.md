@@ -20,7 +20,7 @@ so you can just launch frontend app. It starts locally on port **8090**
 If for some reason the server is down, you can follow the steps below:
 - link to backend: [https://github.com/julizale/marathon](https://github.com/julizale/marathon)
 - configure database connection in backend's `application.properties`
-- change backendUrl in frontend's `application.properties` : `backendUrl=http://localhost:8080/`
+- change backendUrl in frontend's `application.properties` : `backendUrl=http://localhost:8080/v1/`
 - launch the backend application
 - launch frontend: application starts locally on port **8090**
 
