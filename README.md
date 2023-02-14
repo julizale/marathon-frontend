@@ -51,3 +51,7 @@ You can explore endpoints with Swagger at address `/swagger-ui/index.html#/`
 - user authentication & authorization
 - creating a user view
 - recording of events taking place in the system to the database for information purposes
+
+There's still plenty to do, like fixing minor issues, e.g. validating bibNumbers to be unique within one race, 
+possibly automating the process of setting bibNumbers, and many more.
+I will gradually introduce changes as time permits.

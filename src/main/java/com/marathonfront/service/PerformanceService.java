@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.marathonfront.adapter.LocalDateAdapter;
 import com.marathonfront.config.ApiConfig;
 import com.marathonfront.domain.Performance;
+import com.marathonfront.domain.Race;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -32,6 +33,15 @@ public class PerformanceService {
 
     private PerformanceService() {
         restTemplate = new RestTemplate();
+    }
+
+    public Performance getPerformance(Long id) {
+        try {
+            return restTemplate.getForObject(url + "/" + id, Performance.class);
+        } catch (RestClientException e) {
+            LOGGER.error(e.getMessage(), e);
+            return new Performance();
+        }
     }
     public List<Performance> getAllPerformances() {
 
