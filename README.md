@@ -14,7 +14,7 @@ There is also the frontend layer, implemented with the Vaadin library.
 
 ## Setup
 - Backend app is deployed to server, so is database with sample data to play with,
-so you can just launch frontend app. It starts locally on port **8090**
+so you can just launch frontend app. It starts on local port **8090**
 
 
 If for some reason the server is down, you can follow the steps below:
@@ -22,7 +22,7 @@ If for some reason the server is down, you can follow the steps below:
 - configure database connection in backend's `application.properties`
 - change backendUrl in frontend's `application.properties` : `backendUrl=http://localhost:8080/v1/`
 - launch the backend application
-- launch frontend: application starts locally on port **8090**
+- launch frontend: application starts on local port **8090**
 
 ## Description
 The frontend application offers an administrator view that allows you to enter, delete and edit race and users data.
@@ -35,17 +35,20 @@ The backend application includes database support, and a REST API providing endp
 Entities and related tables are modeled:
 - User – representing users, along with their personal data. 
 - Race - there may be several races at different distances within the sporting event.
-- Team - optionally, the user can belong to a team of runners.
+- Team - optionally, the user may belong to a team of runners.
 - Performance - connecting the user with a specific race (one user may take part in one race).
 Creating a performance is equivalent to signing up a user for a race.
 After paying for the event (payment made outside the website) administrator should give the user a starting number (bibNumber).
 After the run, you may update the status from default DNS – Did Not Start to Finisher or DNF - Did Not Finish, and enter the netto and gross time.
 
-In application, there is a scheduler implemented to send a daily e-mail to the administrator 
-with information about the number of users registered for races. You may change administrator 
-credentials in backend's `application.properties`
+In application, there is a scheduler implemented to send a daily e-mail to the administrator
+with information about the number of users registered for races. You may change administrator
+credentials in backend's `application.properties`. The email service uses an html template customized with Thymeleaf variables.
 
-You can explore endpoints with Swagger at address `/swagger-ui/index.html#/`
+You can explore endpoints with Swagger at address [https://marathon-prod-marathon-loasf3.mo2.mogenius.io/swagger-ui/index.html#/](https://marathon-prod-marathon-loasf3.mo2.mogenius.io/swagger-ui/index.html#/)
+
+There's Spring actuator enabled, so you can view info about application at [https://marathon-prod-marathon-loasf3.mo2.mogenius.io/actuator/](https://marathon-prod-marathon-loasf3.mo2.mogenius.io/actuator/)
+
 
 ## Plans for further development
 - user authentication & authorization

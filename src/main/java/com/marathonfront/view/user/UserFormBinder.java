@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -83,8 +84,9 @@ public class UserFormBinder {
         if (!matcher.matches()) {
             return ValidationResult.error("This doesn't seem to be valid email address.");
         }
-        if (userService.getAllUsers().stream().anyMatch(u -> u.getEmail().equals(email))
-                && userForm.getBinder().getBean().getId() == null) {
+        if (userService.getAllUsers().stream().anyMatch(u -> u.getEmail().equals(email) &&
+                (!Objects.equals(u.getId(), userForm.getBinder().getBean().getId()) ||
+                userForm.getBinder().getBean().getId() == null))) {
             return ValidationResult.error("User identified with this email already exists in database.");
         }
         return ValidationResult.ok();

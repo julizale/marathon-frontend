@@ -16,7 +16,6 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
@@ -95,7 +94,7 @@ public class UserForm extends FormLayout {
             setVisible(false);
         } else {
             setVisible(true);
-            team.setValue(user.getTeamId() != 0 ?
+            team.setValue(user.getTeamId() != null && user.getTeamId() != 0  ?
                     teamService.getTeam(user.getTeamId()) : null);
             postalCode.setValue("");
             setRaceCombo(user);
