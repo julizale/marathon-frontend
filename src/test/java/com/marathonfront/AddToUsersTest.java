@@ -20,10 +20,10 @@ public class AddToUsersTest {
 //
 //        Random generator = new Random();
 //
-//        List<String> firstnames = List.of("Stefan", "Natalia", "Mirosław", "John", "Wiera", "Anna",
+//        List<String> firstnames = List.of("Stefan", "Natalia", "Marcin", "John", "Wiera", "Anna",
 //                "Andrij", "Teresa", "Roman", "Krzysztof", "Igor", "Julia", "Magda", "Ryszard", "Agata");
 //        List<String> lastnames = List.of("Kowalczyk", "Smith", "Rzeniszuk", "Wojtczak", "Romanienko", "Trzepizur",
-//                "Komendant", "Chudyba", "Ciuk", "Waltz", "Mogiła", "Korwin", "Lis", "Wilk", "Polak");
+//                "Komendant", "Chudyba", "Ciuk", "Waltz", "Morga", "Korwin", "Lis", "Wilk", "Polak");
 //        List<String> cities = List.of("Częstochowa", "Warszawa", "Częstochowa", "Kraków", "Częstochowa", "Blachownia",
 //                "Częstochowa", "Kłobuck", "Częstochowa", "Gdańsk", "Częstochowa", "Wrocław", "Częstochowa", "Poznań", "Częstochowa");
 //
@@ -31,7 +31,7 @@ public class AddToUsersTest {
 //            int rand1 = generator.nextInt(15);
 //            int rand2 = generator.nextInt(15);
 //            int rand3 = generator.nextInt(15);
-//            int day = generator.nextInt(1, 29);
+//            int day = generator.nextInt(1, 28);
 //            int month = generator.nextInt(1, 13);
 //            int year = generator.nextInt(1953, 2005);
 //            String firstname = firstnames.get(rand1);

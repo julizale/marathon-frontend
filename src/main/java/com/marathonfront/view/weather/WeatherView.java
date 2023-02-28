@@ -42,8 +42,10 @@ public class WeatherView extends VerticalLayout {
         if (date == null) return;
         List<WeatherDay> weatherDays = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
-            WeatherDay weatherDay = weatherService.getWeather(date.minusYears(i)).getDays().get(0);
-            weatherDays.add(weatherDay);
+            WeatherDay weatherDay = weatherService.getWeatherDay(date.minusYears(i));
+            if (weatherDay != null) {
+                weatherDays.add(weatherDay);
+            }
         }
         grid.setItems(weatherDays);
     }

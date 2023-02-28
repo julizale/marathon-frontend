@@ -7,11 +7,10 @@ import org.springframework.web.client.RestTemplate;
 
 public class PostalCodeService {
 
-    private final String url = ApiConfig.backendUrl + "postal/";
-
     private static PostalCodeService postalCodeService;
     private final RestTemplate restTemplate;
     private static final Logger LOGGER = LoggerFactory.getLogger(PostalCodeService.class);
+    private final String url = ApiConfig.backendUrl + "postal/";
 
     public static PostalCodeService getInstance() {
         if (postalCodeService == null) {

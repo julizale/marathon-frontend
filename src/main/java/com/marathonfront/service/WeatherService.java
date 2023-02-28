@@ -1,7 +1,7 @@
 package com.marathonfront.service;
 
 import com.marathonfront.config.ApiConfig;
-import com.marathonfront.domain.weather.Weather;
+import com.marathonfront.domain.weather.WeatherDay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
@@ -15,6 +15,7 @@ public class WeatherService {
     private static WeatherService weatherService;
     private final RestTemplate restTemplate;
     private static final Logger LOGGER = LoggerFactory.getLogger(WeatherService.class);
+    private final String url = ApiConfig.backendUrl + "weather/";
 
     public static WeatherService getInstance() {
         if (weatherService == null) {
@@ -27,17 +28,15 @@ public class WeatherService {
         restTemplate = new RestTemplate();
     }
 
-    public Weather getWeather(LocalDate date) {
-        LOGGER.info("Sending request to weather api for weather " + date);
+    public WeatherDay getWeatherDay(LocalDate date) {
+        LOGGER.info("Sending request to weather api for weather on date: " + date);
         try {
-            URI url = buildUrl(date);
-            LOGGER.info("Built url :\n" + url);
-            Weather weatherResponse = restTemplate.getForObject(url, Weather.class);
-            LOGGER.info("Received: " + weatherResponse);
-            return weatherResponse;
+            WeatherDay weather = restTemplate.getForObject(url + date, WeatherDay.class);
+            LOGGER.info("Received: " + weather);
+            return weather;
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            return new Weather();
+            return null;
         }
     }
 
